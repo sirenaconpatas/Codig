@@ -1,0 +1,208 @@
+public class Balon {
+    // Constantes
+    protected final static String COLOR_BASE = Negro;
+    protected final static Double TAMANO_BASE = 1.0;
+    protected final static Double PRECIO_BASE = 100.0;
+    //Atributos
+    protected String color;
+    protected Double tamano;
+    protected Double precioBase;
+
+    //Constructores
+    public Balon(){
+        this.precioBase = PRECIO_BASE;
+        this.color =  COLOR_BASE;
+        this.tamaño = TAMANO_BASE;
+    }
+   
+    public Balon(Double precioBase, String color){
+        this.precioBase = precioBase;
+        this.tamaño =  TAMANO_BASE;
+        this.color = color;
+    }
+   
+    public Balon(Double precioBase, Double tamano, String color){
+        this.precioBase= precioBase;
+        this.tamano =  tamano;
+        this.color = color;
+        comprobarcolor(color);
+    }
+   
+    // Metodos
+    public void comprobarcolor (String color){
+        if(color = Negro || color = Café || color = Blanco || color = Rojo){
+            this.color = color;
+            }
+        else{
+            this.color = COLOR_BASE;
+            }
+    }
+    
+    public void comprobartamano(Double tamano){
+        if(tamano >= 1 && tamano <= 6){
+            this.tamano = tamano;
+        }else{
+            this.tamaño = TAMANO_BASE;  
+    }
+      
+    public Double calcularPrecio(){
+    double adicion = 0.0;
+        switch (tamano) {
+            case '1':
+                adicion += 200;
+                break;
+            case '2':
+                adicion += 300;
+                break;
+            case '3':
+                adicion += 400;
+                break;
+            case '4':
+                adicion += 500;
+                break;
+            case '5':
+                adicion += 600;
+                break;
+            case '6':
+                adicion += 700;
+                break;
+                
+            default:
+                break;   
+    }
+        // COLOR afecta el precio final
+            if (color += Negro){
+                adicion += 100;
+            }
+            if (color += Café){
+                adicion += 80;
+            }
+            if (color += Blanco){
+                adicion += 70;
+            }
+            if (color += Rojo){
+                adicion += 70;
+            }
+        return precioBase + adicion;
+        }    
+
+    }
+
+public class BalonFutbol extends Balon {
+    // Constantes
+    private final static String MARCA_BASE = Adidas;
+    //Atributos
+    private String marca;
+    
+    //Constructor
+    public BalonFutbol(){
+        this(PRECIO_BASE, COLOR_BASE, TAMANO_BASE, MARCA_BASE);
+    }
+    
+    public BalonFutbol(Double precioBase, Double tamano){
+        super(precioBase, tamano);
+        this.color=  COLOR_BASE;
+        this.marca= MARCA_BASE;
+        }
+    
+    public BalonFutbol(Double precioBase, Double tamano, String color, String marca){
+        super(precioBase, tamano, color);
+        this.marca = marca;
+        }
+    
+    // Métodos
+    public Double calcularPrecio(){
+        Double adicion = super.calcularPrecio();
+        if (marca = Adidas){
+                adicion += 50;
+            }
+            if (color = Puma){
+                adicion += 20;
+            }
+            if (color = Golty){
+                adicion += 70;
+            }
+
+        return adicion;
+    }
+}
+
+public class BalonVoleibol extends Balon {
+    // Constantes
+    private final static String TIPO_SUELO = Indefinido;
+    //Atributos
+    private String suelo;
+    
+    //Constructor
+    public BalonVoleibol(){
+        this(PRECIO_BASE, COLOR_BASE, TAMANO_BASE, TIPO_SUELO);
+    }
+    
+    public BalonVoleibol(Double precioBase, Double tamano){
+        super(precioBase, tamano);
+        this.color=  COLOR_BASE;
+        this.suelo= TIPO_SUELO;
+        }
+    
+    public BalonVoleibol(Double precioBase, Double tamano, String color, String suelo){
+        super(precioBase, tamaño, color);
+        this.suelo = suelo;
+        }
+    
+    // Métodos
+    public Double calcularPrecio(){
+        Double adicion = super.calcularPrecio();
+        if (suelo = Exteriores){
+                adicion += 50;
+            }
+            if (suelo = Interiores){
+                adicion += 30;
+            }
+            if (suelo = Indefinido){
+                adicion += 20;
+            }
+
+        return adicion;
+    }
+}
+
+
+public class PrecioTotal {
+    // Atributos
+    private Double totalBalon;
+    private Double totalBalonFutbol;
+    private Double totalBalonVoleibol;
+    private Balon listaBalon[];
+    // Constructor
+    public PrecioTotal(){
+        this.totalBalon = 0.0;
+        this.totalBalonFutbol = 0.0;
+        this.totalBalonVoleibol = 0.0;
+    }
+    public PrecioTotal(Balon listaBalon[]) {
+        this.totalBalon = 0.0;
+        this.totalBalonFutbol = 0.0;
+        this.totalBalonVoleibol = 0.0;
+        this.listaBalon = listaBalon;
+    }
+    public void mostrarTotales() {
+        // Código
+        for( Balon hijo: listaBalon){
+            if(hijo instanceof Balon){
+                totalBalon += hijo.calcularPrecio();
+            }
+            if(hijo instanceof BalonFutbol){
+                totalBalonFutbol += hijo.calcularPrecio();
+            }
+            if(hijo instanceof BalonVoleibol){
+                totalBalonVoleibol += hijo.calcularPrecio();
+            }
+        }
+    
+        // Mostramos los resultados
+        System.out.println("La suma del precio de los balones es de " + totalBalon);
+        System.out.println("La suma del precio de los balones de futbol es de " + totalBalonFutbol);
+        System.out.print("La suma del precio de los balones de voleibol es de " + totalBalonVoleibol);
+    }
+   
+}
